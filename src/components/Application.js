@@ -3,14 +3,11 @@ import axios from "axios";
 import "components/Application.scss";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
-import { getAppointmentsForDay, getInterview } from "../helpers/selectors";
-import useVisualMode from "hooks/useVisualMode";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "../helpers/selectors";
 
-export default function Application() {
-  const setDay = day => setState({ ...state, day });
-  // const setDays = (days) => {
-  //   setState(prev => ({ ...prev, days }));
-  // }
+
+export default function Application(props) {
+  
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -18,9 +15,25 @@ export default function Application() {
     interviewers: {}
   });
 
-  const dailyAppointments = [];
-  const appointments = getAppointmentsForDay(state, state.day);
+  const setDay = day => setState({ ...state, day });
 
+  const appointments = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
+
+  const bookInterview = (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState({
+      ...state,
+      appointments
+    });
+  }
   const schedule = appointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
   
@@ -29,12 +42,12 @@ export default function Application() {
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
+        interviewers={interviewers}
         interview={interview}
+        bookInterview={bookInterview}
       />
     );
   });
-  
-  
 
   useEffect(() => {
     Promise.all([
@@ -64,7 +77,7 @@ export default function Application() {
         {/* { Object.values(dailyAppointments).map((appointment) => {
         return ( */}
 
-          {getAppointmentsForDay(state, state.day).map(x => <Appointment key={x.id} {...x}/>)}
+          {schedule}
 
 
 

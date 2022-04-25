@@ -14,10 +14,6 @@
 
     function getInterview(state, interview) {
 
-      // const result = [];
-      // const filteredDay = state.days.filter(x => x.name === day) 
-      
-      // if (interview === true) {
       if (interview) {
       let interviewer = state.interviewers[interview.interviewer];
       return {...interview, interviewer}
@@ -25,4 +21,18 @@
       return null
       };
 
-    export { getAppointmentsForDay, getInterview }
+      function getInterviewersForDay(state, day) {
+        const results = [];
+        const intDays = state.days.filter((intDay) => {
+          return intDay.name === day;
+        }) 
+
+        if (intDays[0] === undefined) {
+          return results;
+        }
+        intDays[0].interviewers.forEach((id) => {
+          results.push(state.interviewers[id]);
+        })
+        return results;
+      }
+    export { getAppointmentsForDay, getInterview, getInterviewersForDay }

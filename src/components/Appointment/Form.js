@@ -8,8 +8,8 @@ export default function Form(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   
   const reset = () => {
-    setStudent=("")
-    setInterviewer(null)
+    setStudent("");
+    setInterviewer(null);
   }
 
   function cancel() {
@@ -23,10 +23,11 @@ export default function Form(props) {
     <form autoComplete="off" onSubmit={event => event.preventDefault()}>
       <input
         className="appointment__create-input text--semi-bold"
-        name={props.name}
+        name="student"
         type="text"
+        value={student}
         placeholder="Enter Student Name"
-        onChange={props.onChange}
+        onChange={event => setStudent(event.target.value)}
         
         
         /*
@@ -37,7 +38,7 @@ export default function Form(props) {
     </form>
     <InterviewerList
       interviewers={props.interviewers}
-      // value={currentInterviewer}
+      value={interviewer}
       onChange={(event) => setInterviewer(event)}
     />
   </section>
