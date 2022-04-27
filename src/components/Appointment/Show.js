@@ -1,7 +1,8 @@
 import React from 'react';
 
 
-const Show = function(props) {
+export default function Show(props) {
+  console.log("SHOW", props)
   return (
 <main className="appointment__card appointment__card--show">
   <section className="appointment__card-left">
@@ -31,4 +32,3 @@ const Show = function(props) {
   )
 }
 
-export default Show;
