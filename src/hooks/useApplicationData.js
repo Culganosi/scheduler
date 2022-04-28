@@ -74,7 +74,7 @@ const useApplicationData = () => {
     weekDays[weekDay] = day;
 
     return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
-      .then((res) => {
+      .then(() => {
         setState({ ...state, appointments, weekDays });
       });
   };
