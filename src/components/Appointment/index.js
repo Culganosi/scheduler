@@ -45,7 +45,7 @@ export default function Appointment(props) {
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch(error => transition(ERROR_DELETE, true));
+      .catch((error) => transition(ERROR_DELETE, true));
   }
 
   const cancel = () => {
@@ -69,7 +69,7 @@ export default function Appointment(props) {
         />
       )}
       {mode === ERROR_SAVE && <Error message="Error Saving" onClose={() => back()} />}
-      {mode === ERROR_DELETE && <Error message="Error Deleting" onClose={() => back()} />}
+      {mode === ERROR_DELETE && <Error message="There was an Error on Delete" onClose={() => transition(EMPTY)} />}
       {mode === CREATE && <Form interviewers={props.interviewers} onSave={save} onCancel={back} />}
       {mode === SAVING && <Status message="Saving..." />}
       {mode === DELETE && <Status message="Deleting..." />}
