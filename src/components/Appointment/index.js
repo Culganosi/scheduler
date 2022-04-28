@@ -7,7 +7,7 @@ import Form from 'components/Appointment/Form';
 import useVisualMode from 'hooks/useVisualMode';
 import Status from 'components/Appointment/Status';
 import Confirm from 'components/Appointment/Confirm';
-
+import Error from 'components/Appointment/Error';
 
 
 export default function Appointment(props) {
@@ -68,6 +68,8 @@ export default function Appointment(props) {
           onEdit={editApp}
         />
       )}
+      {mode === ERROR_SAVE && <Error message="Error Saving" onClose={() => back()} />}
+      {mode === ERROR_DELETE && <Error message="Error Deleting" onClose={() => back()} />}
       {mode === CREATE && <Form interviewers={props.interviewers} onSave={save} onCancel={back} />}
       {mode === SAVING && <Status message="Saving..." />}
       {mode === DELETE && <Status message="Deleting..." />}
