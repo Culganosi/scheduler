@@ -2,9 +2,9 @@
 This is a single page React application that allows users to book and cancel interviews. It serves as an introductory React project for students of Lighthouse Labs. 
 
 # Screenshots
-![Scheduler-1](/scheduler/public/images/scheduler1.JPG)
-![Scheduler-2](/scheduler/public/images/scheduler2.JPG)
-![Scheduler-3](/scheduler/public/images/scheduler3.JPG)
+![Scheduler-1](https://github.com/Culganosi/scheduler/blob/master/public/images/scheduler1.JPG)
+![Scheduler-2](https://github.com/Culganosi/scheduler/blob/master/public/images/scheduler2.JPG)
+![Scheduler-3](https://github.com/Culganosi/scheduler/blob/master/public/images/scheduler3.JPG)
 ## Setup
 
 Install dependencies with `npm install`.
