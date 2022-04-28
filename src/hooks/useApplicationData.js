@@ -18,17 +18,17 @@ const useApplicationData = () => {
       axios.get('http://localhost:8001/api/appointments'),
       axios.get('http://localhost:8001/api/interviewers')
     ])
-    .then((all) => {
-      setState((prev) => ({
-        ...prev,
-        days: all[0].data, 
-        appointments: all[1].data, 
-        interviewers: all[2].data,
-      }));
-    })
-    .catch((err) => {
-      console.log("error", err);
-    });
+      .then((all) => {
+        setState((prev) => ({
+          ...prev,
+          days: all[0].data,
+          appointments: all[1].data,
+          interviewers: all[2].data,
+        }));
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
   }, []);
 
   function dayFinder(day) {
@@ -38,11 +38,11 @@ const useApplicationData = () => {
       Wednesday: 2,
       Thursday: 3,
       Friday: 4,
-    }
-    return weekDays[day]
+    };
+    return weekDays[day];
   }
 
-function bookInterview(id, interview) {
+  function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -52,32 +52,32 @@ function bookInterview(id, interview) {
       [id]: appointment
     };
 
-    const weekDay = dayFinder(state.day)
+    const weekDay = dayFinder(state.day);
     let day = {
       ...state.days[weekDay],
       spots: state.days[weekDay]
-    }
-    
+    };
+
     if (!state.appointments[id].interview) {
       day = {
         ...state.days[weekDay],
         spots: state.days[weekDay].spots - 1
-      }
+      };
     } else {
       day = {
         ...state.days[weekDay],
         spots: state.days[weekDay].spots
-      }
+      };
     }
 
-    let weekDays = state.days
+    let weekDays = state.days;
     weekDays[weekDay] = day;
 
     return axios.put(`http://localhost:8001/api/appointments/${id}`, appointment)
       .then((res) => {
-        setState({...state, appointments, weekDays });
-      })
-    };
+        setState({ ...state, appointments, weekDays });
+      });
+  };
 
 
   const cancelInterview = (id) => {
@@ -89,26 +89,26 @@ function bookInterview(id, interview) {
       ...state.appointments,
       [id]: appointment
     };
-    const weekDay = dayFinder(state.day)
+    const weekDay = dayFinder(state.day);
 
     const day = {
       ...state.days[weekDay],
       spots: state.days[weekDay].spots + 1
-    }
+    };
 
-    let weekDays = state.days
+    let weekDays = state.days;
     weekDays[weekDay] = day;
-    
+
     return axios.delete(`http://localhost:8001/api/appointments/${id}`, appointment)
-    .then((res) => {
-      setState({...state, appointments, weekDays });
-  });
-  }
+      .then((res) => {
+        setState({ ...state, appointments, weekDays });
+      });
+  };
   return {
     state,
     setDay,
     bookInterview,
     cancelInterview
-}
-}
+  };
+};
 export default useApplicationData;

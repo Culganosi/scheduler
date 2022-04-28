@@ -49,8 +49,8 @@ export default function Appointment(props) {
   }
 
   const cancel = () => {
-    transition(CONFIRM)
-  }
+    transition(CONFIRM);
+  };
 
   const editApp = () => {
     transition(EDIT);

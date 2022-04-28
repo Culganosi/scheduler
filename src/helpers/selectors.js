@@ -23,13 +23,13 @@ function getInterview(state, interview) {
 
 function getInterviewersForDay(state, dayName) {
   const results = [];
-  const day = state.days.find(d => d.name === dayName)
+  const day = state.days.find(d => d.name === dayName);
   if (!day) {
     return [];
   }
   for (const id of day.interviewers) {
-    const interviewer = state.interviewers[id]
-    results.push(interviewer)
+    const interviewer = state.interviewers[id];
+    results.push(interviewer);
   }
   return results;
 }
