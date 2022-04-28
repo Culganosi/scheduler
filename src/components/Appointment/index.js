@@ -48,6 +48,10 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_DELETE, true));
   }
 
+  const cancel = () => {
+    transition(CONFIRM)
+  }
+
   const editApp = () => {
     transition(EDIT);
   };
@@ -60,7 +64,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete={deleteApp}
+          onDelete={cancel}
           onEdit={editApp}
         />
       )}
