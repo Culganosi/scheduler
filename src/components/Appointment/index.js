@@ -36,7 +36,7 @@ export default function Appointment(props) {
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch(error => transition(ERROR_SAVE, true));
+      .catch(() => transition(ERROR_SAVE, true));
   }
 
 
@@ -69,7 +69,7 @@ export default function Appointment(props) {
         />
       )}
       {mode === ERROR_SAVE && <Error message="Error Saving" onClose={() => back()} />}
-      {mode === ERROR_DELETE && <Error message="There was an Error on Delete" onClose={() => transition(EMPTY)} />}
+      {mode === ERROR_DELETE && <Error message="There was an Error on Delete" onClose={() => back()} />}
       {mode === CREATE && <Form interviewers={props.interviewers} onSave={save} onCancel={back} />}
       {mode === SAVING && <Status message="Saving..." />}
       {mode === DELETE && <Status message="Deleting..." />}
