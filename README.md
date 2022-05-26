@@ -36,3 +36,8 @@ npm run storybook
 * axios
 * node
 * normalize.css
+
+## Stretch 
+
+* Deployed with Heroku, CircleCI and Netlify.
+* [Netlify Link](https://animated-paprenjak-ef0bd3.netlify.app/)
